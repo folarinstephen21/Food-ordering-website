@@ -12,11 +12,11 @@ const Home = () => {
   return (
     <div>
       <Header />
-      <ExploreMenu category={category} setCategory={setCategory}/>
+      <ExploreMenu category={category} setCategory={setCategory} />
       <AppDownload />
-      <FoodDisplay category={category} />
+      <FoodDisplay category={category} setCategory={setCategory} />
     </div>
-  )
+  );
 }
 
 export default Home

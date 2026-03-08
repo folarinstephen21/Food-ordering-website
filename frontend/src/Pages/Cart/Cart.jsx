@@ -1,9 +1,13 @@
 import React, { useContext } from "react";
 import "./Cart.css";
 import { StoreContext } from "../../context/StoreContext";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  const { cartItems, food_list, removeFromCart } = useContext(StoreContext);
+  const { cartItems, food_list, removeFromCart, addCartTotal } =
+    useContext(StoreContext);
+
+  const navigate = useNavigate();
 
   return (
     <div className="cart">
@@ -39,27 +43,38 @@ const Cart = () => {
         })}
       </div>
 
+      {/* I added a condition to render an empty cart total below if cartItem is less than 1 */}
+
       <div className="cart-bottom">
-        <div className="cart-total">
-          <h2>Cart Totals</h2>
-          <div>
-            <div className="cart-total-details">
-              <p>Sub-total</p>
-              <p>{0}</p>
+        {Object.keys(cartItems).length > 0 ? (
+          <div className="cart-total">
+            <h2>Cart Totals</h2>
+            <div>
+              <div className="cart-total-details">
+                <p>Sub-total</p>
+                <p>${addCartTotal()}</p>
+              </div>
+              <hr />
+              <div className="cart-total-details">
+                <p>Delivery Fee</p>
+                <p>${2}</p>
+              </div>
+              <hr />
+              <div className="cart-total-details">
+                <b>Total</b>
+                <b>${addCartTotal() + 2}</b>
+              </div>
             </div>
-            <hr />
-            <div className="cart-total-details">
-              <p>Delivery Fee</p>
-              <p>{2}</p>
-            </div>
-            <hr />
-            <div className="cart-total-details">
-              <b>Total</b>
-              <b>{0}</b>
-            </div>
+            <button
+              disabled={Object.keys(cartItems).length > 0 ? false : true}
+              onClick={() => navigate("/order")}
+            >
+              PROCEED TO CHECKOUT
+            </button>
           </div>
-          <button>PROCEED TO CHECKOUT</button>
-        </div>
+        ) : (
+          <></>
+        )}
         <div className="cart-promocode">
           <div>
             <p>If you have a promocode, Enter it here</p>

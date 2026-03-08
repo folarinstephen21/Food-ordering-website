@@ -2,6 +2,29 @@
     margin-top: 30px;
 }
 
+.food-display-header{
+    display: flex;
+    gap: 20px;
+}
+
+
+.food-display-header button{
+    outline: none;
+    background-color: white;
+    color: tomato;
+    border: 2px solid #aeaeae;
+    font-weight: 500;
+    border-radius: 20px;
+    padding: 10px;
+    transition: all 0.3s;
+   
+}
+
+.food-display-header button:hover{
+    color: white;
+    background-color: tomato;
+}
+
 .food-display h2{
     font-size: max(2vw, 24px);
     font-weight: 600;
