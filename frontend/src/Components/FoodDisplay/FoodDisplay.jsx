@@ -12,7 +12,8 @@ const FoodDisplay = ({ category, setCategory }) => {
       <div className="food-display" id="food-display">
         <div className="food-display-header">
           <h2>Top dishes near you</h2>
-          <button onClick={() => setCategory("All")}>Show All</button>
+          {category !== "All" ? <button onClick={() => setCategory("All")}>Show All</button> : <></>}
+          
         </div>
         <div className="food-display-list">
           {food_list.map((item, index) => {
