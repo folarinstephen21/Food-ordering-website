@@ -46,7 +46,7 @@ const StoreContextProvider = (props) => {
     const response = await axios.get(url+"/api/food/list");
     setFoodList(response.data.data);
   };
-
+// The useEffect below looks for token on local storage and if it finds it same will be used 
   useEffect(() => {
     async function loadData() {
       await fetchFoodList();

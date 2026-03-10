@@ -12,16 +12,21 @@ const FoodDisplay = ({ category, setCategory }) => {
       <div className="food-display" id="food-display">
         <div className="food-display-header">
           <h2>Top dishes near you</h2>
-          {category !== "All" ? <button onClick={() => setCategory("All")}>Show All</button> : <></>}
-          
+          {category !== "All" ? (
+            <button onClick={() => setCategory("All")}>Show All</button>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="food-display-list">
-          {food_list.map((item, index) => {
-            {
-              console.log(category, item.category);
-            }
-            if (category === "All" || category === item.category) {
-              return (
+          {food_list.length === 0 ? (
+            <div>Content loading</div>
+          ) : (
+            food_list
+              .filter(
+                (item) => category === "All" || category === item.category,
+              )
+              .map((item, index) => (
                 <FoodItem
                   key={index}
                   id={item._id}
@@ -30,9 +35,8 @@ const FoodDisplay = ({ category, setCategory }) => {
                   price={item.price}
                   image={item.image}
                 />
-              );
-            }
-          })}
+              ))
+          )}
         </div>
       </div>
     </div>

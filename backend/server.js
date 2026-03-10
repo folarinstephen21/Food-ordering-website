@@ -22,7 +22,7 @@ app.use("/api/food", foodRouter);
 // The image route below is enabled so frontend can verify if image exist in our backend folder/system
 app.use("/images", express.static("uploads"));
 app.use("/api/user", userRouter);
-app.use("/api/cart", cartRouter)
+app.use("/api/cart", cartRouter);
 
 
 
