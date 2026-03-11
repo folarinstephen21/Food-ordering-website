@@ -6,7 +6,7 @@ const addToCart = async (req, res) => {
     const user = await userModel.findByIdAndUpdate(
       req.userId,
       { $inc: { [`cartData.${req.body.itemId}`]: 1 } },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     res.json({
@@ -25,7 +25,7 @@ const removeFromCart = async (req, res) => {
     const user = await userModel.findByIdAndUpdate(
       req.userId,
       { $inc: { [`cartData.${req.body.itemId}`]: -1 } },
-      { new: true },
+      { returnDocument: "after" },
     );
 
     res.json({
