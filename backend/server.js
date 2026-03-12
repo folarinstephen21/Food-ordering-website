@@ -33,6 +33,6 @@ app.get("/", (req, res) => {
   res.send("API working");
 });
 
-app.listen(port, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${port}`);
 });
