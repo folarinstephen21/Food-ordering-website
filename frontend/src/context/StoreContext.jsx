@@ -5,28 +5,28 @@ export const StoreContext = createContext(null);
 
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
-  const url = "https://food-ordering-website-m0w1.onrender.com";
+  const url = import.meta.env.VITE_API_URL;
   const [token, setToken] = useState("");
   const [food_list, setFoodList] = useState([]);
 
- const addToCart = async (itemId) => {
-   setCartItems((prev) => ({
-     ...prev,
-     [itemId]: (prev[itemId] || 0) + 1,
-   }));
+  const addToCart = async (itemId) => {
+    setCartItems((prev) => ({
+      ...prev,
+      [itemId]: (prev[itemId] || 0) + 1,
+    }));
 
-   if (token) {
-     const res = await axios.post(
-       url + "/api/cart/add",
-       { itemId },
-       { headers: { token } },
-     );
+    if (token) {
+      const res = await axios.post(
+        url + "/api/cart/add",
+        { itemId },
+        { headers: { token } },
+      );
 
-     if (res.data.success) {
-       setCartItems(res.data.cartData);
-     }
-   }
- };
+      if (res.data.success) {
+        setCartItems(res.data.cartData);
+      }
+    }
+  };
 
   const removeFromCart = async (itemId) => {
     setCartItems((prev) => ({
@@ -60,21 +60,21 @@ const StoreContextProvider = (props) => {
   };
 
   const fetchFoodList = async () => {
-    const response = await axios.get(url+"/api/food/list");
+    const response = await axios.get(url + "/api/food/list");
     setFoodList(response.data.data);
   };
 
- const fetchCartItems = async () => {
-   try {
-     const res = await axios.post(url + "/api/cart/get", null, {
-       headers: { token },
-     });
-     setCartItems(res.data.cartData);
-   } catch (error) {
-     console.log(error);
-   }
- };
-// The useEffect below looks for token on local storage and if it finds it same will be used 
+  const fetchCartItems = async () => {
+    try {
+      const res = await axios.post(url + "/api/cart/get", null, {
+        headers: { token },
+      });
+      setCartItems(res.data.cartData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // The useEffect below looks for token on local storage and if it finds it same will be used
   useEffect(() => {
     fetchFoodList();
 
